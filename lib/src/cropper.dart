@@ -207,6 +207,12 @@ class CropInfo {
   final String path;
   final double x, y, width, height;
 
+  get minX => x;
+  get minY => y;
+
+  get maxX => x + width;
+  get maxY => y + height;
+
   CropInfo(
       {required this.path,
       required this.x,
