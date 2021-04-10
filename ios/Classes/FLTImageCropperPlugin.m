@@ -211,7 +211,7 @@
     NSString *tmpPath = [tmpDirectory stringByAppendingPathComponent:tmpFile];
     
     if ([[NSFileManager defaultManager] createFileAtPath:tmpPath contents:data attributes:nil]) {
-        _result(tmpPath);
+        _result([NSString stringWithFormat:@"%@|\\|%f|\\|%f|\\|%f|\\|%f", tmpPath, cropRect.origin.x, cropRect.origin.y, cropRect.size.width, cropRect.size.height]);
     } else {
         _result([FlutterError errorWithCode:@"create_error"
                                     message:@"Temporary file could not be created"

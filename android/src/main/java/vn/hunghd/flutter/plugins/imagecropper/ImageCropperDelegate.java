@@ -13,6 +13,7 @@ import com.yalantis.ucrop.view.CropImageView;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -96,7 +97,23 @@ public class ImageCropperDelegate implements PluginRegistry.ActivityResultListen
         if (requestCode == UCrop.REQUEST_CROP) {
             if (resultCode == RESULT_OK) {
                 final Uri resultUri = UCrop.getOutput(data);
+
+                final int x = data.getIntExtra(UCrop.EXTRA_OUTPUT_OFFSET_X, -1);
+                final int y = data.getIntExtra(UCrop.EXTRA_OUTPUT_OFFSET_Y, -1);
+                final int width = UCrop.getOutputImageWidth(data);
+                final int height = UCrop.getOutputImageHeight(data);
+
+                finishWithSuccess(String.format(
+                        Locale.US,
+                        "%s|\\|%d|\\|%d|\\|%d|\\|%d",
+                        fileUtils.getPathFromUri(activity, resultUri),
+                        x,
+                        y,
+                        width,
+                        height
+                ));
                 finishWithSuccess(fileUtils.getPathFromUri(activity, resultUri));
+
                 return true;
             } else if (resultCode == UCrop.RESULT_ERROR) {
                 final Throwable cropError = UCrop.getError(data);
