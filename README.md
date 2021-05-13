@@ -6,13 +6,13 @@
     git:
       url: https://github.com/JakobStadlhuber/flutter_image_cropper.git
       ref: master
-      
+````yaml      
 
 
 
 ````dart
 CropInfo croppedFile = await ImageCropper.cropImageWithCoordinates(...)
-
+````dart
 
 [![pub package](https://img.shields.io/pub/v/image_cropper.svg)](https://pub.dartlang.org/packages/image_cropper)
 
